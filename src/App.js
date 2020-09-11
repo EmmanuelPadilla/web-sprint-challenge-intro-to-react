@@ -6,19 +6,21 @@ import Bio from "./components/bio";
 import styled from "styled-components";
 
 const initialData = [];
+
 const StyledApp = styled.div`
-  background-color: darkgray;
+  /* background-color: darkgray; */
   width: 80%;
   margin: 0 auto;
 `;
 function App() {
   const [people, setPeople] = useState(initialData);
-  console.log(people.results.name);
+  console.log(people, "<------------log this");
   useEffect(() => {
     axios
-      .get(`https://swapi.dev/api/people/1`)
+      .get(`https://swapi.dev/api/people/`)
       .then((res) => {
-        setPeople(res.data);
+        console.log(res.data.results);
+        setPeople(res.data.results);
       })
       .catch((err) => {
         return console.log("error", err);
@@ -29,22 +31,28 @@ function App() {
 
   return (
     <StyledApp className="App">
-      <header className="appheader">
-      {people.results.map((character) => {
-        <div>
-          <Character characterName={character.name} />
-          <div>
-            <Bio
-              height={character.height}
-              mass={character.mass}
-              hair={character.hair_color}
-              eye={character.eye_color}
-            />
-          </div>
-        </div>
-      
-      
-      </header>
+      <header className="appheader"></header>
+      <div className="body">
+        <h1>StarWars Reaction</h1>
+        {people.map((character) => {
+          return (
+            <div>
+              <Character characterName={character.name} />
+              <div>
+                <Bio
+                  height={character.height}
+                  mass={character.mass}
+                  hair={character.hair_color}
+                  eye={character.eye_color}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <footer>
+        <h3>May the force be with you!</h3>
+      </footer>
     </StyledApp>
   );
 }

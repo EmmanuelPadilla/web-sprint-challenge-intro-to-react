@@ -1,5 +1,5 @@
 export default {
-  primaryColor: "#f21818",
+  primaryColor: "#2f2e30",
 
   secondaryColor: "#212121",
 };

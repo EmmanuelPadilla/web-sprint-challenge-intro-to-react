@@ -9,6 +9,7 @@ const StyledBio = styled.div`
   background-color: gray;
   width: 60%;
   margin: 0 auto;
+  margin-bottom: 5rem;
 `;
 
 const Bio = (props) => {
