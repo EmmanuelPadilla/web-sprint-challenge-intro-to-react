@@ -1,18 +1,61 @@
-import React from 'react';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import axios from "axios";
+import Character from "./components/Character";
+import Bio from "./components/bio";
+import styled from "styled-components";
 
-const App = () => {
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
+const initialData = [];
 
-  // Fetch characters from the API in an effect hook. Remember, anytime you have a 
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
+const StyledApp = styled.div`
+  /* background-color: darkgray; */
+  color: white;
+  width: 80%;
+  margin: 0 auto;
+`;
+function App() {
+  const [people, setPeople] = useState(initialData);
+  console.log(people, "<------------log this");
+  useEffect(() => {
+    axios
+      .get(`https://swapi.dev/api/people/`)
+      .then((res) => {
+        console.log(res.data.results);
+        setPeople(res.data.results);
+      })
+      .catch((err) => {
+        return console.log("error", err);
+      });
+  }, []);
+
+  // const country = {};
 
   return (
-    <div className="App">
-      <h1 className="Header">Characters</h1>
-    </div>
+    <StyledApp className="App">
+      <header className="appheader"></header>
+      <div className="body">
+        <h1>StarWars Reaction</h1>
+        {people.map((character) => {
+          return (
+            <div>
+              <Character key={character.id} characterName={character.name} />
+              <div>
+                <Bio
+                  key={character.id}
+                  height={character.height}
+                  mass={character.mass}
+                  hair={character.hair_color}
+                  eye={character.eye_color}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <footer>
+        <h3>May the force be with you!</h3>
+      </footer>
+    </StyledApp>
   );
 }
 
