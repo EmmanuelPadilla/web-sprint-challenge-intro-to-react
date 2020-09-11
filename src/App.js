@@ -9,6 +9,7 @@ const initialData = [];
 
 const StyledApp = styled.div`
   /* background-color: darkgray; */
+  color: white;
   width: 80%;
   margin: 0 auto;
 `;
