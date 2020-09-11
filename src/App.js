@@ -38,9 +38,10 @@ function App() {
         {people.map((character) => {
           return (
             <div>
-              <Character characterName={character.name} />
+              <Character key={character.id} characterName={character.name} />
               <div>
                 <Bio
+                  key={character.id}
                   height={character.height}
                   mass={character.mass}
                   hair={character.hair_color}
