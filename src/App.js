@@ -13,7 +13,7 @@ const StyledApp = styled.div`
 `;
 function App() {
   const [people, setPeople] = useState(initialData);
-  console.log(people.name);
+  console.log(people.results.name);
   useEffect(() => {
     axios
       .get(`https://swapi.dev/api/people/1`)
@@ -30,17 +30,20 @@ function App() {
   return (
     <StyledApp className="App">
       <header className="appheader">
+      {people.results.map((character) => {
         <div>
-          <Character characterName={people.name} />
+          <Character characterName={character.name} />
           <div>
             <Bio
-              height={people.height}
-              mass={people.mass}
-              hair={people.hair_color}
-              eye={people.eye_color}
+              height={character.height}
+              mass={character.mass}
+              hair={character.hair_color}
+              eye={character.eye_color}
             />
           </div>
         </div>
+      
+      
       </header>
     </StyledApp>
   );
