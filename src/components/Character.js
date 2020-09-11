@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledCharacter = styled.div`
-  color: ${(pr) => pr.theme.mainText};
+  color: ${(pr) => pr.theme.primaryColor};
 `;
 
 const Character = (props) => {
